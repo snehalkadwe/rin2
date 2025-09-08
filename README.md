@@ -1,6 +1,6 @@
 # Notification Management System
 
-<p align="center">An application that allows users to see special posts as a one-time notification.</p>
+<p align="left">An application that allows users to see special posts as a one-time notification.</p>
 
 ## Features
 
@@ -40,13 +40,13 @@ cd laravel-notification-system
 
 ### 2. Install Dependencies
 
--   Install PHP dependencies
+Install PHP dependencies
 
 ```php
 composer install
 ```
 
--   Install JavaScript dependencies
+Install JavaScript dependencies
 
 ```php
 npm install
@@ -58,7 +58,7 @@ npm install
     cp .env.example .env
 ```
 
--Generate application key
+Generate application key
 
 ```php
 php artisan key:generate
@@ -79,7 +79,7 @@ DB_PASSWORD=your_password
 
 ### 5. Twilio Configuration
 
--   Add your Twilio credentials to `.env`:
+Add your Twilio credentials to `.env`:
 
 ```php
 TWILIO_SID=your_twilio_account_sid
@@ -105,13 +105,13 @@ php artisan db:seed
 composer require laravel/breeze --dev
 ```
 
--   Install Breeze scaffolding
+Install Breeze scaffolding
 
 ```php
 php artisan breeze:install blade
 ```
 
--   Build assets
+Build assets
 
 ```php
 npm run build

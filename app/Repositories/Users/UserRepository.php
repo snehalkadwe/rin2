@@ -61,19 +61,9 @@ class UserRepository implements UserInterface
         $authToken = config('services.twilio.token');
         $twilio = new Client($sID, $authToken);
         try {
-            // return true;
             $payload = $twilio->lookups->v2->phoneNumbers($phoneNumber)->fetch(['fields' => 'line_type_intelligence']);
-
             // If the phone number is not valid return false
-            if ($payload->valid === false) {
-                return false;
-            }
-
-            // Check the line type intellience if the given number is for mobile or not
-            if (
-                isset($payload->lineTypeIntelligence['type'])
-                && strtolower($payload->lineTypeIntelligence['type']) === 'mobile'
-            ) {
+            if ($payload->valid) {
                 return true;
             }
             return false;

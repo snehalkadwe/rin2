@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
 use App\Models\Notification;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -51,7 +52,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function notifications()
+    public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
     }
@@ -59,16 +60,22 @@ class User extends Authenticatable
     public function unreadNotifications()
     {
         return $this->notifications()->where('is_read', false)
-                    ->where('expiration', '>', now());
+            ->where('expiration', '>', now());
     }
 
-    public function canImpersonate()
+    public function canImpersonate(): bool
     {
-        return $this->email === 'admin@admin.com'; // Only allow impersonation for admin user
+        // Only allow impersonation for admin user
+        return $this->email === config('app.admin_email') || $this->is_admin;
     }
 
-    public function canBeImpersonated()
+    public function canBeImpersonated(): bool
     {
         return true;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
     }
 }
